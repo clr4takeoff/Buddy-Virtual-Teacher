@@ -88,7 +88,7 @@ class _VoiceChatState extends State<VoiceChat> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 85.0,
+        height: 120.0,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
