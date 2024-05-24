@@ -61,7 +61,7 @@ class _VoiceChatState extends State<VoiceChat> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: Column(
                 children: [
                   Text(
@@ -88,7 +88,7 @@ class _VoiceChatState extends State<VoiceChat> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 120.0,
+        height: 85.0,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -128,7 +128,7 @@ class _VoiceChatState extends State<VoiceChat> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.only(bottom: 0),
         child: GestureDetector(
           onTapDown: (_) => _onMicButtonPress(),
           onTapUp: (_) => _onMicButtonRelease(),
