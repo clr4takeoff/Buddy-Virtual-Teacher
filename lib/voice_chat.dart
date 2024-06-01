@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class VoiceChat extends StatefulWidget {
   @override
@@ -7,17 +9,40 @@ class VoiceChat extends StatefulWidget {
 
 class _VoiceChatState extends State<VoiceChat> {
   bool _isPressed = false;
+  final FlutterSoundRecorder _recorder = FlutterSoundRecorder();
 
-  void _onMicButtonPress() {
+  @override
+  void initState() {
+    super.initState();
+    initRecorder();
+  }
+
+  Future<void> initRecorder() async {
+    final status = await Permission.microphone.request();
+    if (status != PermissionStatus.granted) {
+      throw RecordingPermissionException('Microphone permission not granted');
+    }
+    await _recorder.openAudioSession();
+  }
+
+  void _onMicButtonPress() async {
     setState(() {
       _isPressed = true;
     });
+    await _recorder.startRecorder(toFile: 'voice_recording.aac');
   }
 
-  void _onMicButtonRelease() {
+  void _onMicButtonRelease() async {
     setState(() {
       _isPressed = false;
     });
+    await _recorder.stopRecorder();
+  }
+
+  @override
+  void dispose() {
+    _recorder.closeAudioSession();
+    super.dispose();
   }
 
   @override
@@ -28,107 +53,64 @@ class _VoiceChatState extends State<VoiceChat> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
                     icon: Icon(Icons.close, color: Colors.black54),
-                    iconSize: 30.0,
                     onPressed: () {},
                   ),
-                  SizedBox(width: 24),
+                  IconButton(
+                    icon: Image.asset('assets/choose_character.png', width: 24, height: 24),
+                    onPressed: () {},
+                  ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
+              padding: const EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
               child: Text(
-                '이야기를 시작해볼까?',
+                '안녕 철수야? 인어공주가 물거품이 되었다는 이야기를 들었어.',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFF525252),
-                  fontSize: 25,
+                  fontSize: 22,
                   fontFamily: 'Inter',
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset(
                 'assets/character1.png',
-                height: 300,
+                height: 260,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: Column(
-                children: [
-                  Text(
-                    '루피',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFD6967),
-                    ),
-                  ),
-                  Text(
-                    '뽀롱뽀롱뽀로로',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+            Text(
+              '왕자',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFFD6967),
               ),
             ),
-            Spacer(),
+            SizedBox(height: 5),
+            Text(
+              '인어공주',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
+              ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 120.0,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 10,
-              spreadRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: BottomAppBar(
-          child: Container(
-            height: 60.0,
-            padding: EdgeInsets.symmetric(horizontal: 30.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  icon: Image.asset(
-                    'assets/character_choose.png',
-                    height: 40,
-                  ),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Image.asset(
-                    'assets/history.png',
-                    height: 40,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 0),
+        padding: const EdgeInsets.only(bottom: 30),
         child: GestureDetector(
           onTapDown: (_) => _onMicButtonPress(),
           onTapUp: (_) => _onMicButtonRelease(),
