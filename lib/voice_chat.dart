@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sound/flutter_sound.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
 
 class VoiceChat extends StatefulWidget {
@@ -9,40 +9,87 @@ class VoiceChat extends StatefulWidget {
 
 class _VoiceChatState extends State<VoiceChat> {
   bool _isPressed = false;
-  final FlutterSoundRecorder _recorder = FlutterSoundRecorder();
+  late stt.SpeechToText _speech;
+  String _recognizedText = '';
+  bool _isListening = false;
+  String _errorText = '';
+  bool _hasStartedSpeaking = false;
+  bool _speechComplete = false;
 
   @override
   void initState() {
     super.initState();
-    initRecorder();
+    _speech = stt.SpeechToText();
+    _requestMicrophonePermission();
   }
 
-  Future<void> initRecorder() async {
-    final status = await Permission.microphone.request();
+  Future<void> _requestMicrophonePermission() async {
+    PermissionStatus status = await Permission.microphone.request();
     if (status != PermissionStatus.granted) {
-      throw RecordingPermissionException('Microphone permission not granted');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('마이크 권한이 필요합니다.')),
+      );
     }
-    await _recorder.openAudioSession();
   }
 
   void _onMicButtonPress() async {
-    setState(() {
-      _isPressed = true;
-    });
-    await _recorder.startRecorder(toFile: 'voice_recording.aac');
+    if (!_hasStartedSpeaking) {
+      setState(() {
+        _hasStartedSpeaking = true;
+      });
+    }
+
+    if (await Permission.microphone.isGranted) {
+      bool available = await _speech.initialize(
+        onStatus: (status) {
+          setState(() {
+            if (status == 'done' || status == 'notListening') {
+              _isListening = false;
+              _speechComplete = true;  // Update when speech recognition completes
+            } else {
+              _isListening = true;
+            }
+          });
+        },
+        onError: (error) {
+          setState(() {
+            _errorText = 'Error: $error';
+          });
+        },
+      );
+      if (available) {
+        setState(() {
+          _isPressed = true;
+          _isListening = true;
+          _errorText = '';
+        });
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _recognizedText = val.recognizedWords;
+          }),
+          onSoundLevelChange: (level) {
+            setState(() {});
+          },
+          listenFor: Duration(seconds: 20),
+          pauseFor: Duration(seconds: 5),
+          partialResults: true,
+          localeId: "ko_KR",
+          onDevice: true,
+          cancelOnError: true,
+          listenMode: stt.ListenMode.confirmation,
+        );
+      }
+    } else {
+      await _requestMicrophonePermission();
+    }
   }
 
-  void _onMicButtonRelease() async {
+  void _onMicButtonRelease() {
     setState(() {
       _isPressed = false;
+      _isListening = false;
     });
-    await _recorder.stopRecorder();
-  }
-
-  @override
-  void dispose() {
-    _recorder.closeAudioSession();
-    super.dispose();
+    _speech.stop();
   }
 
   @override
@@ -71,7 +118,9 @@ class _VoiceChatState extends State<VoiceChat> {
             Padding(
               padding: const EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
               child: Text(
-                '안녕 철수야? 인어공주가 물거품이 되었다는 이야기를 들었어.',
+                _speechComplete ?
+                '그렇지만.. 나는 진심으로 사랑하는 사람이 따로 있었어..' :
+                '안녕 철수야? 인어공주가 물거품이 되었다는 이야기를 들었는데 무슨 일이야?',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFF525252),
@@ -84,27 +133,66 @@ class _VoiceChatState extends State<VoiceChat> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset(
-                'assets/character1.png',
+                _speechComplete ? 'assets/character2.png' : 'assets/character1.png',
                 height: 260,
               ),
             ),
-            Text(
-              '왕자',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFFFD6967),
+            if (!_hasStartedSpeaking) ...[
+              Text(
+                '왕자',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFFD6967),
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '인어공주',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Text(
+                _recognizedText,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF525252),
+                  fontSize: 18,
+                  fontFamily: 'Inter',
+                ),
               ),
             ),
-            SizedBox(height: 5),
-            Text(
-              '인어공주',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Colors.grey,
+            if (_isListening)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Text(
+                  '이야기를 들려주세요!',
+                  style: TextStyle(
+                    color: Color(0xFFFD6967),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
+            if (_errorText.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(
+                  _errorText,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -121,7 +209,7 @@ class _VoiceChatState extends State<VoiceChat> {
             fillColor: _isPressed ? Color(0xFFFF9900) : Color(0xFFFED43E),
             child: Icon(
               Icons.mic,
-              size: 70.0,
+              size: 60.0,
               color: Colors.white,
             ),
             padding: EdgeInsets.all(22.0),
