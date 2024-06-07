@@ -54,9 +54,10 @@ dev_dependencies:
 flutter:
    assets:
      - assets/bg.png
-     - assets/chatview.png
      - assets/change.png
      - assets/settings.png
+     - assets/close.png
+     - assets/bubble.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
