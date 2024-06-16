@@ -53,7 +53,7 @@ class _ParentState extends State<Parent> {
                         ),
                         onPressed: _toggleSettingsVisibility,
                       ),
-                      IconButton(
+                      IconButton( //TODO: 부모-아이 모드 화면 전환
                         icon: Image.asset(
                           'assets/change.png',
                           width: 25.0,
