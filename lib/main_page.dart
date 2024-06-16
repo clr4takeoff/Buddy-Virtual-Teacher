@@ -48,7 +48,7 @@ class MainPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
+                            MaterialPageRoute(builder: (context) => MainPage()), // TODO: MainPage() --> Grape() 로 변경
                           );
                         },
                         child: Container(
@@ -213,7 +213,7 @@ class MainPage extends StatelessWidget {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => MainPage()),
+                                    MaterialPageRoute(builder: (context) => MainPage()), // TODO : MainPage() --> Parent Mode의 클래스 명으로 변경
                                   );
                                 },
                                 child: Container(
@@ -416,7 +416,7 @@ class MainPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
+                            MaterialPageRoute(builder: (context) => MainPage()), // TODO: MainPage() --> 동화 선택 페이지 클래스 명으로 바꾸기
                           );
                         },
                         child: Container(
