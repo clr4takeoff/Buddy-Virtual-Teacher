@@ -709,7 +709,7 @@ class _GrapeState extends State<Grape> {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Grape()),
+                                    MaterialPageRoute(builder: (context) => Grape()), // TODO : Grape() --> MainPage() 로 바꾸기
                                   );
                                 },
                                 child: Container(
@@ -749,7 +749,7 @@ class _GrapeState extends State<Grape> {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Grape()),
+                                    MaterialPageRoute(builder: (context) => Grape()), // TODO : Grape() --> Parent Mode의 클래스 명으로 바꾸기
                                   );
                                 },
                                 child: Container(
