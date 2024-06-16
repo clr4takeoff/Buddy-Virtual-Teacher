@@ -25,37 +25,92 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _showSearchBar = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
-      body: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
+      appBar: MyAppBar(
+        showSearchBar: _showSearchBar,
+        onSearchIconPressed: () {
+          setState(() {
+            _showSearchBar = !_showSearchBar;
+          });
+        },
+      ),
+      body: Column(
         children: [
-          _buildBookCard(
-            '인어공주',
-            'assets/images/mermaid.png',
-          ),
-          _buildBookCard(
-            '신데렐라',
-            'assets/images/cinderella.png',
-          ),
-          _buildBookCard(
-            '백설공주',
-            'assets/images/snow_white.png',
-          ),
-          _buildBookCard(
-            '잠자는 숲속의 공주',
-            'assets/images/sleeping_beauty.png',
-          ),
-          _buildBookCard(
-            '미녀와 야수',
-            'assets/images/beauty_and_the_beast.png',
-          ),
-          _buildBookCard(
-            '라푼젤',
-            'assets/images/tangled.png',
+          _showSearchBar
+              ? Container(
+            height: 90,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: Colors.white38),
+                        ),
+                        // enabledBorder: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(20),
+                        //   borderSide: BorderSide(color: Colors.white38),
+                        // ),
+                        // focusedBorder: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(20),
+                        //   borderSide: BorderSide(color: Colors.white38),
+                        // ),
+                        hintText: '검색',
+                        hintStyle: TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    setState(() {
+                      _showSearchBar = false;
+                    });
+                  },
+                ),
+              ],
+            ),
+          )
+              : Container(),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              childAspectRatio: 0.8,
+              children: [
+                _buildBookCard(
+                  '인어공주',
+                  'assets/images/mermaid.png',
+                ),
+                _buildBookCard(
+                  '신데렐라',
+                  'assets/images/cinderella.png',
+                ),
+                _buildBookCard(
+                  '백설공주',
+                  'assets/images/snow_white.png',
+                ),
+                _buildBookCard(
+                  '잠자는 숲속의 공주',
+                  'assets/images/sleeping_beauty.png',
+                ),
+                _buildBookCard(
+                  '미녀와 야수',
+                  'assets/images/beauty_and_the_beast.png',
+                ),
+                _buildBookCard(
+                  '라푼젤',
+                  'assets/images/tangled.png',
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -89,6 +144,11 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool showSearchBar;
+  final VoidCallback onSearchIconPressed;
+
+  MyAppBar({required this.showSearchBar, required this.onSearchIconPressed});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -111,7 +171,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: Icon(Icons.search, color: Colors.red[400]),
-          onPressed: () {},
+          onPressed: onSearchIconPressed,
         ),
       ],
       backgroundColor: Colors.white,
