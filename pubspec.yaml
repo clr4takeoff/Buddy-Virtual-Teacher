@@ -52,7 +52,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - assets/aesop_button.png
+    - assets/classic_button.png
+    - assets/cre_button.png
+    - assets/mode_change.png
+    - assets/podo_button.png
+    - assets/traditional_button.png
+    - assets/WiFi.png
+    - assets/Time.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
