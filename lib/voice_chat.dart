@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:async';
 
 class VoiceChat extends StatefulWidget {
   @override
@@ -16,11 +18,26 @@ class _VoiceChatState extends State<VoiceChat> {
   bool _hasStartedSpeaking = false;
   bool _speechComplete = false;
 
+  late VideoPlayerController _videoController;
+  bool _isVideoInitialized = false;
+
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
     _requestMicrophonePermission();
+    _initializeVideoPlayer();
+  }
+
+  Future<void> _initializeVideoPlayer() async {
+    _videoController = VideoPlayerController.asset('assets/video/Lip Sync_안녕_ 인어공주가 물거품이 되었..._Frank..._.mp4');
+    await _videoController.initialize();
+    setState(() {
+      _isVideoInitialized = true;
+    });
+    Future.delayed(Duration(seconds: 3), () {
+      _videoController.play();
+    });
   }
 
   Future<void> _requestMicrophonePermission() async {
@@ -45,7 +62,7 @@ class _VoiceChatState extends State<VoiceChat> {
           setState(() {
             if (status == 'done' || status == 'notListening') {
               _isListening = false;
-              _speechComplete = true;  // Update when speech recognition completes
+              _speechComplete = true;
             } else {
               _isListening = true;
             }
@@ -93,6 +110,12 @@ class _VoiceChatState extends State<VoiceChat> {
   }
 
   @override
+  void dispose() {
+    _videoController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFF1D6),
@@ -132,10 +155,12 @@ class _VoiceChatState extends State<VoiceChat> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40.0),
-              child: Image.asset(
-                _speechComplete ? 'assets/character2.png' : 'assets/character1.png',
-                height: 260,
-              ),
+              child: _isVideoInitialized
+                  ? AspectRatio(
+                aspectRatio: _videoController.value.aspectRatio,
+                child: VideoPlayer(_videoController),
+              )
+                  : CircularProgressIndicator(),
             ),
             if (!_hasStartedSpeaking) ...[
               Text(
