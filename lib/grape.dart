@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:buddyvirty/main_page.dart';
+import 'package:buddyvirty/parent.dart';
 import 'package:flutter/material.dart';
 
 class Grape extends StatefulWidget {
@@ -750,7 +751,7 @@ class _GrapeState extends State<Grape> {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => Grape()),
+                                    MaterialPageRoute(builder: (context) => Parent()),
                                   );
                                 },
                                 child: Container(

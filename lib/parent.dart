@@ -31,37 +31,140 @@ class _ParentState extends State<Parent> {
           children: [
             Image.asset('assets/bg.png'),
             Positioned(
-              top: 50.0,
-              right: 60.0,
-              child: IconButton(
-                icon: Image.asset(
-                  'assets/settings.png',
-                  width: 30.0,
-                  height: 30.0,
-                ),
-                onPressed: () {
-                  _toggleSettingsVisibility;
-                },
+              top: 65.0,
+              left: 25.0,
+              right: 25.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '아이 동화 기록',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Image.asset(
+                          'assets/settings.png',
+                          width: 25.0,
+                          height: 25.0,
+                        ),
+                        onPressed: _toggleSettingsVisibility,
+                      ),
+                      IconButton(
+                        icon: Image.asset(
+                          'assets/change.png',
+                          width: 25.0,
+                          height:25.0,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              top: 50.0,
-              right: 15.0,
-              child: IconButton(
-                icon: Image.asset(
-                  'assets/change.png',
-                  width: 30.0,
-                  height: 30.0,
+            if (_isSettingsVisible)
+              Positioned(
+                top: 105.0,
+                right: 25.0,
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: 350.0,
+                    height: 212.0,
+                    padding: EdgeInsets.all(30.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/bubble.png'),
+                        fit: BoxFit.fill,
+                        alignment: Alignment.center,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '아이의 목표 대화 시간을 설정해 주세요.',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 28.0),
+                            Text(
+                              '(분)',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${_sliderValue.round()}',
+                              style: TextStyle(
+                                  fontSize: 27.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFFD6967)
+                              ),
+                            ),
+                            Baseline(
+                              baseline: 25.0,
+                              baselineType: TextBaseline.alphabetic,
+                              child: Text(
+                                '분',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.0),
+                        Slider(
+                          value: _sliderValue,
+                          min: 0,
+                          max: 40,
+                          divisions: 4,
+                          activeColor: Color(0xFFFFC600),
+                          onChanged: (value) {
+                            setState(() {
+                              _sliderValue = value;
+                            });
+                          },
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: List.generate(5, (index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Text('${index * 10}'),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainPage()), // TODO: MainPage() --> Grape() 로 변경
-                  );
-                  // Your onPressed action here
-                },
               ),
-            ),
             Positioned(
               top: 560.0,
               left: 20.0,
