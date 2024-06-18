@@ -1,5 +1,6 @@
 import 'package:buddyvirty/grape.dart';
 import 'package:buddyvirty/parent.dart';
+import 'package:buddyvirty/selectstory.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -418,7 +419,7 @@ class MainPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()), // TODO: MainPage() --> 동화 선택 페이지 클래스 명으로 바꾸기
+                            MaterialPageRoute(builder: (context) => MyHomePage(title: "명작동화")), // TODO: MainPage() --> 동화 선택 페이지 클래스 명으로 바꾸기
                           );
                         },
                         child: Container(

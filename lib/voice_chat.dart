@@ -1,3 +1,4 @@
+import 'package:buddyvirty/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
@@ -124,7 +125,12 @@ class _VoiceChatState extends State<VoiceChat> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.close, color: Colors.black54),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MainPage()), // TODO: MainPage() --> 동화 선택 페이지 클래스 명으로 바꾸기
+                        );
+                      },
                     ),
                     IconButton(
                       icon: Image.asset('assets/choose_character.png', width: 24, height: 24),
