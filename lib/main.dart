@@ -1,4 +1,5 @@
 import 'main_page.dart';
+import 'package:buddyvirty/voice_chat.dart';
 import 'package:flutter/material.dart';
 
 void main() {
