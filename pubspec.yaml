@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   speech_to_text: ^6.6.1
   video_player: ^2.2.18
+  audioplayers: ^6.0.0
 
 
 
@@ -67,7 +68,8 @@ flutter:
      - assets/character1.png
      - assets/choose_character.png
      - assets/character2.png
-     - assets/video/Lip Sync_안녕_ 인어공주가 물거품이 되었..._Frank..._.mp4
+     - assets/prince.gif
+     - assets/music1.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

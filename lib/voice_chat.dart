@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
-import 'package:video_player/video_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 
 class VoiceChat extends StatefulWidget {
@@ -18,26 +18,20 @@ class _VoiceChatState extends State<VoiceChat> {
   bool _hasStartedSpeaking = false;
   bool _speechComplete = false;
 
-  late VideoPlayerController _videoController;
-  bool _isVideoInitialized = false;
+  late AudioPlayer _audioPlayer;
 
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
+    _audioPlayer = AudioPlayer();
     _requestMicrophonePermission();
-    _initializeVideoPlayer();
+    _initializeAudioPlayer();
   }
 
-  Future<void> _initializeVideoPlayer() async {
-    _videoController = VideoPlayerController.asset('assets/video/Lip Sync_안녕_ 인어공주가 물거품이 되었..._Frank..._.mp4');
-    await _videoController.initialize();
-    setState(() {
-      _isVideoInitialized = true;
-    });
-    Future.delayed(Duration(seconds: 3), () {
-      _videoController.play();
-    });
+  Future<void> _initializeAudioPlayer() async {
+    await Future.delayed(Duration(seconds: 3));
+    await _audioPlayer.play(AssetSource('assets/music1.mp3'));
   }
 
   Future<void> _requestMicrophonePermission() async {
@@ -111,7 +105,7 @@ class _VoiceChatState extends State<VoiceChat> {
 
   @override
   void dispose() {
-    _videoController.dispose();
+    _audioPlayer.dispose();
     super.dispose();
   }
 
@@ -120,105 +114,102 @@ class _VoiceChatState extends State<VoiceChat> {
     return Scaffold(
       backgroundColor: Color(0xFFFFF1D6),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.close, color: Colors.black54),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: Image.asset('assets/choose_character.png', width: 24, height: 24),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
-              child: Text(
-                _speechComplete ?
-                '그렇지만.. 나는 진심으로 사랑하는 사람이 따로 있었어..' :
-                '안녕 철수야? 인어공주가 물거품이 되었다는 이야기를 들었는데 무슨 일이야?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF525252),
-                  fontSize: 22,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0),
-              child: _isVideoInitialized
-                  ? AspectRatio(
-                aspectRatio: _videoController.value.aspectRatio,
-                child: VideoPlayer(_videoController),
-              )
-                  : CircularProgressIndicator(),
-            ),
-            if (!_hasStartedSpeaking) ...[
-              Text(
-                '왕자',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFFD6967),
-                ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                '인어공주',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Text(
-                _recognizedText,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF525252),
-                  fontSize: 18,
-                  fontFamily: 'Inter',
-                ),
-              ),
-            ),
-            if (_isListening)
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.close, color: Colors.black54),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Image.asset('assets/choose_character.png', width: 24, height: 24),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
                 child: Text(
-                  '이야기를 들려주세요!',
+                  _speechComplete ?
+                  '그렇지만.. 나는 진심으로 사랑하는 사람이 따로 있었어..' :
+                  '안녕 철수야? 인어공주가 물거품이 되었다는 이야기를 들었는데 무슨 일이야?',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
+                    color: Color(0xFF525252),
+                    fontSize: 22,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40.0),
+                child: Image.asset('assets/prince.gif'),
+              ),
+              if (!_hasStartedSpeaking) ...[
+                Text(
+                  '왕자',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                     color: Color(0xFFFD6967),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            if (_errorText.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
-                  _errorText,
+                SizedBox(height: 5),
+                Text(
+                  '인어공주',
                   style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Text(
+                  _recognizedText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF525252),
+                    fontSize: 18,
+                    fontFamily: 'Inter',
                   ),
                 ),
               ),
-          ],
+              if (_isListening)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Text(
+                    '이야기를 들려주세요!',
+                    style: TextStyle(
+                      color: Color(0xFFFD6967),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              if (_errorText.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    _errorText,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
