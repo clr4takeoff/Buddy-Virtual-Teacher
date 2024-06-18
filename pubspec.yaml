@@ -71,6 +71,14 @@ flutter:
     - assets/character2.png
     - assets/prince.gif
     - assets/music1.mp3
+    - assets/Back.png
+    - assets/confetti.png
+    - assets/grape.png
+    - assets/mode_change.png
+    - assets/reward_button.png
+    - assets/reward_x_button.png
+    - assets/Time.png
+    - assets/WiFi.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

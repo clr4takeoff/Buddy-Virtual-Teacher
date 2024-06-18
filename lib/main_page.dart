@@ -1,3 +1,4 @@
+import 'package:buddyvirty/grape.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -48,7 +49,7 @@ class MainPage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()), // TODO: MainPage() --> Grape() 로 변경
+                            MaterialPageRoute(builder: (context) => Grape()), // TODO: MainPage() --> Grape() 로 변경
                           );
                         },
                         child: Container(
