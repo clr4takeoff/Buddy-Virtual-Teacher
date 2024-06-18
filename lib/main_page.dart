@@ -1,4 +1,5 @@
 import 'package:buddyvirty/grape.dart';
+import 'package:buddyvirty/parent.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -214,7 +215,7 @@ class MainPage extends StatelessWidget {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => MainPage()), // TODO : MainPage() --> Parent Mode의 클래스 명으로 변경
+                                    MaterialPageRoute(builder: (context) => Parent()), // TODO : MainPage() --> Parent Mode의 클래스 명으로 변경
                                   );
                                 },
                                 child: Container(

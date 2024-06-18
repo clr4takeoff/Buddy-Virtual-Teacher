@@ -79,7 +79,13 @@ flutter:
     - assets/reward_x_button.png
     - assets/Time.png
     - assets/WiFi.png
+    - assets/bg.png
+    - assets/change.png
+    - assets/settings.png
+    - assets/close.png
+    - assets/bubble.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
