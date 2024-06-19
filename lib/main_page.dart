@@ -10,20 +10,20 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: Stack(
-        children: [
+            child: Stack(
+            children: [
           Column(
             children: [
               Container(
                 width: 393,
-                height: 802,
+                height: 852,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Stack(
                   children: [
                     Positioned(
                       left: 18,
-                      top: 185,
+                      top: 235,
                       child: InkWell(
                         onTap: () {
                           Navigator.push(
@@ -45,7 +45,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 18,
-                      top: 60,
+                      top: 110,
                       child: Container(
                         width: 358,
                         height: 94,
@@ -153,7 +153,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 0,
-                      top: 00,
+                      top: 50,
                       child: Container(
                         width: 393,
                         height: 52,
@@ -214,7 +214,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 202,
-                      top: 386,
+                      top: 436,
                       child: Container(
                         width: 176,
                         height: 161,
@@ -228,7 +228,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 18,
-                      top: 562,
+                      top: 612,
                       child: Container(
                         width: 174,
                         height: 160,
@@ -242,7 +242,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 18,
-                      top: 386,
+                      top: 436,
                       child: InkWell(
                         onTap: () {
                           Navigator.push(
@@ -264,7 +264,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 203,
-                      top: 562,
+                      top: 612,
                       child: Container(
                         width: 175,
                         height: 160,

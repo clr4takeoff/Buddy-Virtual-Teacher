@@ -36,14 +36,14 @@ class _GrapeState extends State<Grape> {
             children: [
               Container(
                 width: 393,
-                height: 802,
+                height: 852,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Stack(
                   children: [
                     Positioned(
                       left: 63,
-                      top: 666,
+                      top: 716,
                       child: InkWell(
                         onTap: _showConfettiAndHideCircles,
                         child: Container(
@@ -60,7 +60,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 25,
-                      top: 171,
+                      top: 221,
                       child: Container(
                         width: 343,
                         height: 480,
@@ -74,7 +74,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 43,
-                      top: 252,
+                      top: 302,
                       child: Container(
                         width: 307,
                         height: 385,
@@ -536,7 +536,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 0,
-                      top: 212,
+                      top: 262,
                       child: Visibility(
                         visible: _showConfetti,
                         child: Container(
@@ -553,7 +553,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 18,
-                      top: 60,
+                      top: 110,
                       child: Container(
                         width: 358,
                         height: 94,
@@ -661,7 +661,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 0,
-                      top: 0,
+                      top: 50,
                       child: Container(
                         width: 393,
                         height: 52,
