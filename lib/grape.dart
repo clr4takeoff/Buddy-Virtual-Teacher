@@ -28,50 +28,22 @@ class _GrapeState extends State<Grape> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: Scaffold(
-        body: ListView(children: [
+    return Scaffold(
+        body: Center(
+            child: Stack(
+                children: [
           Column(
             children: [
               Container(
                 width: 393,
-                height: 852,
+                height: 802,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 130,
-                      top: 813,
-                      child: Container(
-                        width: 134,
-                        height: 31,
-                        padding: const EdgeInsets.only(top: 18, bottom: 8),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 134,
-                              height: 5,
-                              decoration: ShapeDecoration(
-                                color: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
                       left: 63,
-                      top: 716,
+                      top: 666,
                       child: InkWell(
                         onTap: _showConfettiAndHideCircles,
                         child: Container(
@@ -88,7 +60,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 25,
-                      top: 221,
+                      top: 171,
                       child: Container(
                         width: 343,
                         height: 480,
@@ -102,7 +74,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 43,
-                      top: 302,
+                      top: 252,
                       child: Container(
                         width: 307,
                         height: 385,
@@ -564,7 +536,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 0,
-                      top: 262,
+                      top: 212,
                       child: Visibility(
                         visible: _showConfetti,
                         child: Container(
@@ -581,7 +553,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 18,
-                      top: 110,
+                      top: 60,
                       child: Container(
                         width: 358,
                         height: 94,
@@ -689,7 +661,7 @@ class _GrapeState extends State<Grape> {
                     ),
                     Positioned(
                       left: 0,
-                      top: 50,
+                      top: 0,
                       child: Container(
                         width: 393,
                         height: 52,
@@ -763,155 +735,6 @@ class _GrapeState extends State<Grape> {
                                       fit: BoxFit.fill,
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 49,
-                      top: 22,
-                      child: Container(
-                        width: 312,
-                        height: 15,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 0,
-                              top: 1,
-                              child: Container(
-                                width: 37,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Time.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 284,
-                              top: 1,
-                              child: Container(
-                                width: 28,
-                                height: 14,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      left: 0,
-                                      top: 0,
-                                      child: Opacity(
-                                        opacity: 0.35,
-                                        child: Container(
-                                          width: 25,
-                                          height: 14,
-                                          decoration: ShapeDecoration(
-                                            shape: RoundedRectangleBorder(
-                                              side: BorderSide(width: 1),
-                                              borderRadius: BorderRadius.circular(3.50),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 2,
-                                      top: 2,
-                                      child: Container(
-                                        width: 21,
-                                        height: 10,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 258,
-                              top: 0,
-                              child: Container(
-                                width: 21,
-                                height: 15,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('assets/WiFi.png'),
-                                      fit: BoxFit.fill,
-                                    )
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 230,
-                              top: 1,
-                              child: Container(
-                                width: 22,
-                                height: 13,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      left: 0,
-                                      top: 8,
-                                      child: Container(
-                                        width: 4,
-                                        height: 5,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 6,
-                                      top: 6,
-                                      child: Container(
-                                        width: 4,
-                                        height: 7,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 12,
-                                      top: 3,
-                                      child: Container(
-                                        width: 4,
-                                        height: 10,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 18,
-                                      top: 0,
-                                      child: Container(
-                                        width: 4,
-                                        height: 13,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ),

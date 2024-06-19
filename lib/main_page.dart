@@ -8,45 +8,22 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
-      ),
-      home: Scaffold(
-        body: ListView(children: [
+    return Scaffold(
+        body: Center(
+          child: Stack(
+        children: [
           Column(
             children: [
               Container(
                 width: 393,
-                height: 852,
+                height: 802,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(color: Colors.white),
                 child: Stack(
                   children: [
                     Positioned(
-                      left: 130,
-                      top: 810,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 134,
-                            height: 5,
-                            decoration: ShapeDecoration(
-                              color: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
                       left: 18,
-                      top: 235,
+                      top: 185,
                       child: InkWell(
                         onTap: () {
                           Navigator.push(
@@ -68,7 +45,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 18,
-                      top: 110,
+                      top: 60,
                       child: Container(
                         width: 358,
                         height: 94,
@@ -176,7 +153,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 0,
-                      top: 50,
+                      top: 00,
                       child: Container(
                         width: 393,
                         height: 52,
@@ -236,157 +213,8 @@ class MainPage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: 49,
-                      top: 22,
-                      child: Container(
-                        width: 312,
-                        height: 15,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 0,
-                              top: 1,
-                              child: Container(
-                                width: 37,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Time.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 284,
-                              top: 1,
-                              child: Container(
-                                width: 28,
-                                height: 14,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      left: 0,
-                                      top: 0,
-                                      child: Opacity(
-                                        opacity: 0.35,
-                                        child: Container(
-                                          width: 25,
-                                          height: 14,
-                                          decoration: ShapeDecoration(
-                                            shape: RoundedRectangleBorder(
-                                              side: BorderSide(width: 1),
-                                              borderRadius: BorderRadius.circular(3.50),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 2,
-                                      top: 2,
-                                      child: Container(
-                                        width: 21,
-                                        height: 10,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 258,
-                              top: 0,
-                              child: Container(
-                                width: 21,
-                                height: 15,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/WiFi.png'),
-                                    fit: BoxFit.fill,
-                                  )
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 230,
-                              top: 1,
-                              child: Container(
-                                width: 22,
-                                height: 13,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      left: 0,
-                                      top: 8,
-                                      child: Container(
-                                        width: 4,
-                                        height: 5,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 6,
-                                      top: 6,
-                                      child: Container(
-                                        width: 4,
-                                        height: 7,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 12,
-                                      top: 3,
-                                      child: Container(
-                                        width: 4,
-                                        height: 10,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 18,
-                                      top: 0,
-                                      child: Container(
-                                        width: 4,
-                                        height: 13,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.black,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(1.50),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Positioned(
                       left: 202,
-                      top: 436,
+                      top: 386,
                       child: Container(
                         width: 176,
                         height: 161,
@@ -400,7 +228,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 18,
-                      top: 612,
+                      top: 562,
                       child: Container(
                         width: 174,
                         height: 160,
@@ -414,7 +242,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 18,
-                      top: 436,
+                      top: 386,
                       child: InkWell(
                         onTap: () {
                           Navigator.push(
@@ -436,7 +264,7 @@ class MainPage extends StatelessWidget {
                     ),
                     Positioned(
                       left: 203,
-                      top: 612,
+                      top: 562,
                       child: Container(
                         width: 175,
                         height: 160,
@@ -454,7 +282,7 @@ class MainPage extends StatelessWidget {
             ],
           ),
         ]),
-      ),
+        ),
     );
   }
 }
