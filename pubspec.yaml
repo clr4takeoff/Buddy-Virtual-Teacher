@@ -52,8 +52,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  assets:
+   assets:
+     - assets/bg.png
+     - assets/change.png
+     - assets/settings.png
+     - assets/close.png
+     - assets/bubble.png
     - assets/Back.png
     - assets/confetti.png
     - assets/grape.png
