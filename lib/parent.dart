@@ -1,3 +1,4 @@
+import 'package:buddyvirty/main_page.dart';
 import 'package:flutter/material.dart';
 
 class Parent extends StatefulWidget {
@@ -60,6 +61,10 @@ class _ParentState extends State<Parent> {
                           height:25.0,
                         ),
                         onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                          );
                         },
                       ),
                     ],

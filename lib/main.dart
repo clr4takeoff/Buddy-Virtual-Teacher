@@ -1,3 +1,5 @@
+import 'main_page.dart';
+import 'package:buddyvirty/voice_chat.dart';
 import 'grape.dart';
 import 'package:flutter/material.dart';
 import 'parent.dart';
@@ -10,9 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'BuddyVirty',
-      home: Grape()
+      home: MainPage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
     );
   }
 }
