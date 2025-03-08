@@ -71,6 +71,11 @@ flutter:
     - assets/character2.png
     - assets/prince.gif
     - assets/music1.mp3
+     - assets/bg.png
+     - assets/change.png
+     - assets/settings.png
+     - assets/close.png
+     - assets/bubble.png
     - assets/Back.png
     - assets/confetti.png
     - assets/grape.png
@@ -85,7 +90,9 @@ flutter:
     - assets/close.png
     - assets/bubble.png
     - assets/images/
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+stom-fonts/#from-packages
